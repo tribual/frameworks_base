@@ -38,6 +38,7 @@ import com.android.systemui.biometrics.FingerprintReEnrollNotification;
 import com.android.systemui.biometrics.UdfpsDisplayModeProvider;
 import com.android.systemui.biometrics.dagger.BiometricsModule;
 import com.android.systemui.biometrics.dagger.UdfpsModule;
+import com.android.systemui.bootleg.BootlegModule;
 import com.android.systemui.bouncer.ui.BouncerViewModule;
 import com.android.systemui.classifier.FalsingModule;
 import com.android.systemui.clipboardoverlay.dagger.ClipboardOverlayModule;
@@ -182,6 +183,7 @@ import javax.inject.Named;
             KeyboardModule.class,
             LetterboxModule.class,
             KeyguardBlueprintModule.class,
+            BootlegModule.class,
             LogModule.class,
             MediaProjectionModule.class,
             MediaProjectionTaskSwitcherModule.class,
