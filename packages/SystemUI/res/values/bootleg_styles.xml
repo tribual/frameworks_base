@@ -11,4 +11,8 @@
     <item name="cornerFamily">rounded</item>
     <item name="cornerSize">48dp</item>
   </style>
+  <!-- Pure Tuner Theme-->
+  <style name="ExTunerSettings" parent="@android:style/Theme.DeviceDefault.Settings">
+    <item name="preferenceTheme">@style/TunerPreferenceTheme</item>
+  </style>
 </resources>
