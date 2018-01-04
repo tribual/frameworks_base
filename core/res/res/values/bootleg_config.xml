@@ -140,4 +140,6 @@
         <item>com.facebook.katana.LoginActivity</item>
     </string-array>
 
+    <!-- Whether the device supports Smart Pixels -->
+    <bool name="config_supportSmartPixels">false</bool>
 </resources>
