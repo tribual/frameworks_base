@@ -39,4 +39,7 @@
     <integer name="qs_panel_num_columns">4</integer>
     <integer name="qs_panel_num_columns_landscape">6</integer>
     <integer name="qs_panel_num_columns_media">4</integer>
+
+    <!-- Allow devices override audio panel location to the left side -->
+    <bool name="config_audioPanelOnLeftSide">false</bool>
 </resources>
