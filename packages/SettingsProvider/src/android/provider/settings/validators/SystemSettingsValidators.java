@@ -235,5 +235,6 @@ public class SystemSettingsValidators {
         VALIDATORS.put(System.WAKE_WHEN_PLUGGED_OR_UNPLUGGED, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.AUTO_BRIGHTNESS_ONE_SHOT, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.DOUBLE_TAP_SLEEP_GESTURE, BOOLEAN_VALIDATOR);
+        VALIDATORS.put(System.RINGTONE_VIBRATION_PATTERN, new InclusiveIntegerRangeValidator(0, 4));
     }
 }
