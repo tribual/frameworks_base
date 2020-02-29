@@ -7441,5 +7441,8 @@ message MetricsEvent {
 
     // Bootleggers Metrics
     BOOTLEG = 3210;
+
+    // Panel for Mobile Data
+    PANEL_MOBILE_DATA = 4001;
   }
 }
