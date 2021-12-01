@@ -1911,6 +1911,7 @@ public final class PowerManager {
         }
     }
 
+    /**
      * Reboot the device with custom progress meassges.
      * Will not return if the reboot is successful.
      * <p>
