@@ -64,4 +64,7 @@
 
     <!-- Whether Pixel props is enabled -->
     <bool name="config_enablePixelProps">true</bool>
+
+    <!-- Whether to cancel fingerprint operation if not idle -->
+    <bool name="config_fpCancelIfNotIdle">false</bool>
 </resources>
