@@ -6146,6 +6146,12 @@ public final class Settings {
         public static final String QS_SHOW_BATTERY_PERCENT = "qs_show_battery_percent";
 
         /**
+         * Whether to enable the ripple animation on fingerprint unlock
+         * @hide
+         */
+        public static final String ENABLE_RIPPLE_EFFECT = "enable_ripple_effect";
+
+        /**
          * These are all public system settings
          *
          * @hide
