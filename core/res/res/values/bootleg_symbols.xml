@@ -72,4 +72,8 @@
     <java-symbol type="string" name="poweroff_alarm_title" />
     <java-symbol type="string" name="poweroff_alarm_body" />
     <java-symbol type="drawable" name="ic_alarm_on" />
+
+    <!-- App lock -->
+    <java-symbol type="string" name="unlock_application" />
+    <java-symbol type="array" name="config_appLockAllowedSystemApps" />
 </resources>
