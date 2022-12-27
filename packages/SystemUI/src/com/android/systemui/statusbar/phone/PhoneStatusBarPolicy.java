@@ -44,6 +44,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.service.notification.ZenModeConfig;
@@ -115,6 +116,8 @@ public class PhoneStatusBarPolicy
 
     private static final String BLUETOOTH_SHOW_BATTERY =
             "system:" + Settings.System.BLUETOOTH_SHOW_BATTERY;
+    private static final String NETWORK_TRAFFIC_LOCATION =
+            "system:" + Settings.System.NETWORK_TRAFFIC_LOCATION;
 
     private final String mSlotCast;
     private final String mSlotHotspot;
@@ -133,6 +136,7 @@ public class PhoneStatusBarPolicy
     private final String mSlotConnectedDisplay;
     private final String mSlotNfc;
     private final String mSlotFirewall;
+    private final String mSlotNetworkTraffic;
     private final int mDisplayId;
     private final SharedPreferences mSharedPreferences;
     private final DateFormatUtil mDateFormatUtil;
@@ -185,6 +189,8 @@ public class PhoneStatusBarPolicy
 
     private boolean mShowBluetoothBattery;
     private boolean mHideBluetooth;
+
+    private boolean mShowNetworkTraffic;
 
     @Inject
     public PhoneStatusBarPolicy(Context context, StatusBarIconController iconController,
@@ -257,6 +263,8 @@ public class PhoneStatusBarPolicy
                 com.android.internal.R.string.status_bar_screen_record);
         mSlotNfc = resources.getString(com.android.internal.R.string.status_bar_nfc);
         mSlotFirewall = resources.getString(R.string.status_bar_firewall_slot);
+        mSlotNetworkTraffic = resources.getString(com.android.internal.R.string.status_bar_network_traffic);
+        mCurrentUserSetup = mProvisionedController.isDeviceProvisioned();
 
         mDisplayId = displayId;
         mSharedPreferences = sharedPreferences;
@@ -264,6 +272,7 @@ public class PhoneStatusBarPolicy
 
         Dependency.get(TunerService.class).addTunable(this,
                 BLUETOOTH_SHOW_BATTERY,
+                NETWORK_TRAFFIC_LOCATION,
                 StatusBarIconController.ICON_HIDE_LIST);
     }
 
@@ -355,6 +364,10 @@ public class PhoneStatusBarPolicy
         // firewall
         mIconController.setIcon(mSlotFirewall, R.drawable.stat_sys_firewall, null);
         mIconController.setIconVisibility(mSlotFirewall, mFirewallVisible);
+        // network traffic
+        mShowNetworkTraffic = Settings.System.getIntForUser(mContext.getContentResolver(),
+            NETWORK_TRAFFIC_LOCATION, 0, UserHandle.USER_CURRENT) == 1;
+        updateNetworkTraffic();
 
         mRotationLockController.addCallback(this);
         mBluetooth.addCallback(this);
@@ -400,6 +413,11 @@ public class PhoneStatusBarPolicy
                 mShowBluetoothBattery =
                         TunerService.parseIntegerSwitch(newValue, true);
                 updateBluetooth();
+                break;
+            case NETWORK_TRAFFIC_LOCATION:
+                mShowNetworkTraffic =
+                        TunerService.parseInteger(newValue, 0) == 1;
+                updateNetworkTraffic();
                 break;
             case StatusBarIconController.ICON_HIDE_LIST:
                 ArraySet<String> hideList = StatusBarIconController.getIconHideList(mContext, newValue);
@@ -540,6 +558,11 @@ public class PhoneStatusBarPolicy
 
         mIconController.setBluetoothIcon(mSlotBluetooth,
                 new BluetoothIconState(!mHideBluetooth && bluetoothVisible, batteryLevel, contentDescription));
+    }
+
+    private final void updateNetworkTraffic() {
+        mIconController.setNetworkTraffic(mSlotNetworkTraffic, new NetworkTrafficState(mShowNetworkTraffic));
+        mIconController.setIconVisibility(mSlotNetworkTraffic, mShowNetworkTraffic);
     }
 
     private final void updateTTY() {
@@ -920,6 +943,19 @@ public class PhoneStatusBarPolicy
         @Override
         public String toString() {
             return "BluetoothIconState(visible=" + visible + " batteryLevel=" + batteryLevel + ")";
+        }
+    }
+
+    public static class NetworkTrafficState {
+        public boolean visible;
+
+        public NetworkTrafficState(boolean visible) {
+            this.visible = visible;
+        }
+
+        @Override
+        public String toString() {
+            return "NetworkTrafficState(visible=" + visible + ")";
         }
     }
 }
