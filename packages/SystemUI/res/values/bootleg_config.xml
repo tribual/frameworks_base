@@ -18,4 +18,7 @@
     <item name="config_behind_scrim_transparency_amount" translatable="false" format="float" type="dimen">
         0
     </item>
+
+    <!-- Update battery info every second when device is charging -->
+    <bool name="config_alternateFastchargeInfoUpdate">false</bool>
 </resources>
