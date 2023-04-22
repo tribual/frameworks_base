@@ -6384,6 +6384,11 @@ public final class Settings {
         public static final String QS_TILE_LABEL_HIDE = "qs_tile_label_hide";
 
         /**
+         * @hide
+         */
+        public static final String QS_TILE_UI_STYLE = "qs_tile_ui_style";
+
+        /**
          * These are all hidden system settings.
          *
          * @hide
