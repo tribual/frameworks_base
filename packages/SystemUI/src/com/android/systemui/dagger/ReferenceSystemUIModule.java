@@ -71,11 +71,11 @@ import com.android.systemui.statusbar.policy.SensorPrivacyControllerImpl;
 import com.android.systemui.volume.dagger.VolumeModule;
 import com.android.systemui.wallpapers.dagger.WallpaperModule;
 
+import javax.inject.Named;
+
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
-
-import javax.inject.Named;
 
 /**
  * A dagger module for injecting default implementations of components of System UI.
