@@ -41,7 +41,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.systemui.Dependency;
 import com.android.systemui.Dumpable;
 import com.android.systemui.R;
-import com.android.systemui.bliss.CurrentWeatherView;
+import com.android.systemui.bootleg.CurrentWeatherView;
 import com.android.systemui.dagger.qualifiers.Main;
 import com.android.systemui.dump.DumpManager;
 import com.android.systemui.flags.FeatureFlags;

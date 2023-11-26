@@ -14,7 +14,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<com.android.systemui.bliss.CurrentWeatherView
+<com.android.systemui.bootleg.CurrentWeatherView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -54,6 +54,14 @@
             android:singleLine="true"
             android:paddingStart="8dp"
             style="@style/TextAppearance.Keyguard.Secondary" />
+
+        <TextView
+            android:id="@+id/weather_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/wallpaperTextColor"
+            android:singleLine="true"
+            style="@style/TextAppearance.Keyguard.Secondary" />
     </LinearLayout>
 
-</com.android.systemui.bliss.CurrentWeatherView>
+</com.android.systemui.bootleg.CurrentWeatherView>
