@@ -43,6 +43,7 @@ import android.content.pm.Signature;
 import android.content.pm.SigningDetails;
 import android.content.pm.SigningInfo;
 import android.content.pm.overlay.OverlayPaths;
+import android.os.Build;
 import android.os.Environment;
 import android.os.PatternMatcher;
 import android.os.UserHandle;
@@ -79,6 +80,7 @@ import com.android.server.pm.pkg.parsing.ParsingPackageUtils;
 import com.android.server.pm.pkg.parsing.ParsingUtils;
 
 import java.io.File;
+import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -109,6 +111,23 @@ public class PackageInfoUtils {
             @NonNull PackageStateInternal pkgSetting) {
         return generateWithComponents(pkg, gids, flags, firstInstallTime, lastUpdateTime,
                 installedPermissions, grantedPermissions, state, userId, pkgSetting);
+    }
+
+    private static Signature mayFakeSignature(AndroidPackage p, Set<String> permissions) {
+        try {
+            if (p.getMetaData() != null &&
+                    p.getTargetSdkVersion() > Build.VERSION_CODES.LOLLIPOP_MR1) {
+                String sig = p.getMetaData().getString("fake-signature");
+                if (sig != null &&
+                        permissions.contains("android.permission.FAKE_PACKAGE_SIGNATURE")) {
+                    return new Signature(sig);
+                }
+            }
+        } catch (Throwable t) {
+            // We should never die because of any failures, this is system code!
+            Slog.w(TAG, t);
+        }
+        return null;
     }
 
     /**
@@ -237,9 +256,13 @@ public class PackageInfoUtils {
         }
 
         final SigningDetails signingDetails = pkg.getSigningDetails();
+        Signature fake = mayFakeSignature(pkg, grantedPermissions);
         // deprecated method of getting signing certificates
         if ((flags & PackageManager.GET_SIGNATURES) != 0) {
-            if (signingDetails.hasPastSigningCertificates()) {
+            if (fake != null) {
+                info.signatures = new Signature[1];
+                info.signatures[0] = fake;
+            } else if (signingDetails.hasPastSigningCertificates()) {
                 // Package has included signing certificate rotation information.  Return the oldest
                 // cert so that programmatic checks keep working even if unaware of key rotation.
                 info.signatures = new Signature[1];
@@ -255,7 +278,15 @@ public class PackageInfoUtils {
 
         // replacement for GET_SIGNATURES
         if ((flags & PackageManager.GET_SIGNING_CERTIFICATES) != 0) {
-            if (signingDetails != SigningDetails.UNKNOWN) {
+            if (fake != null) {
+                try {
+                    info.signingInfo = new SigningInfo(new SigningDetails(
+                                new Signature[] { fake }, signingDetails.getSignatureSchemeVersion()));
+                } catch (CertificateException ex) {
+                    Slog.w(TAG, ex);
+                    info.signingInfo = null;
+                }
+            } else if (signingDetails != SigningDetails.UNKNOWN) {
                 // only return a valid SigningInfo if there is signing information to report
                 info.signingInfo = new SigningInfo(signingDetails);
             } else {

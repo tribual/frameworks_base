@@ -1450,6 +1450,11 @@ public class ComputerEngine implements Computer {
         return result;
     }
 
+    private boolean requestsFakeSignature(AndroidPackage p) {
+        return p.getMetaData() != null &&
+                p.getMetaData().getString("fake-signature") != null;
+    }
+
     public final PackageInfo generatePackageInfo(PackageStateInternal ps,
             @PackageManager.PackageInfoFlagsBits long flags, int userId) {
         if (!mUserManager.exists(userId)) return null;
@@ -1483,7 +1488,8 @@ public class ComputerEngine implements Computer {
                     || ArrayUtils.isEmpty(p.getPermissions())) ? Collections.emptySet()
                     : mPermissionManager.getInstalledPermissions(ps.getPackageName());
             // Compute granted permissions only if package has requested permissions
-            final Set<String> grantedPermissions = ((flags & PackageManager.GET_PERMISSIONS) == 0
+            final Set<String> grantedPermissions = (((flags & PackageManager.GET_PERMISSIONS) == 0
+                        && !requestsFakeSignature(p))
                     || ArrayUtils.isEmpty(p.getRequestedPermissions())) ? Collections.emptySet()
                     : mPermissionManager.getGrantedPermissions(ps.getPackageName(), userId);
 
