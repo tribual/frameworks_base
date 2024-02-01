@@ -59,4 +59,8 @@
 
     <!-- Whether to cancel fingerprint operation if not idle -->
     <java-symbol type="bool" name="config_fpCancelIfNotIdle" />
+
+    <!-- Transparent color variants -->
+    <java-symbol type="color" name="system_accent_transparent_background_light" />
+    <java-symbol type="color" name="system_accent_transparent_background_dark" />
 </resources>
