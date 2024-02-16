@@ -70,19 +70,19 @@ public class NetworkTraffic extends TextView implements TunerService.Tunable {
     private static final int Giga = Mega * Kilo;
 
     private static final String NETWORK_TRAFFIC_LOCATION =
-            Settings.Secure.NETWORK_TRAFFIC_LOCATION;
+            Settings.System.NETWORK_TRAFFIC_LOCATION;
     private static final String NETWORK_TRAFFIC_MODE =
-            Settings.Secure.NETWORK_TRAFFIC_MODE;
+            Settings.System.NETWORK_TRAFFIC_MODE;
     private static final String NETWORK_TRAFFIC_AUTOHIDE =
-            Settings.Secure.NETWORK_TRAFFIC_AUTOHIDE;
+            Settings.System.NETWORK_TRAFFIC_AUTOHIDE;
     private static final String NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD =
-            Settings.Secure.NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD;
+            Settings.System.NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD;
     private static final String NETWORK_TRAFFIC_UNITS =
-            Settings.Secure.NETWORK_TRAFFIC_UNITS;
+            Settings.System.NETWORK_TRAFFIC_UNITS;
     private static final String NETWORK_TRAFFIC_REFRESH_INTERVAL =
-            Settings.Secure.NETWORK_TRAFFIC_REFRESH_INTERVAL;
+            Settings.System.NETWORK_TRAFFIC_REFRESH_INTERVAL;
     private static final String NETWORK_TRAFFIC_HIDEARROW =
-            Settings.Secure.NETWORK_TRAFFIC_HIDEARROW;
+            Settings.System.NETWORK_TRAFFIC_HIDEARROW;
 
     protected int mLocation = LOCATION_DISABLED;
     private int mMode = MODE_UPSTREAM_AND_DOWNSTREAM;

@@ -116,7 +116,7 @@ public class PhoneStatusBarPolicy
     private static final String BLUETOOTH_SHOW_BATTERY =
             "system:" + Settings.System.BLUETOOTH_SHOW_BATTERY;
     private static final String NETWORK_TRAFFIC_LOCATION =
-            Settings.Secure.NETWORK_TRAFFIC_LOCATION;
+            Settings.System.NETWORK_TRAFFIC_LOCATION;
 
     private final String mSlotCast;
     private final String mSlotHotspot;
@@ -364,7 +364,7 @@ public class PhoneStatusBarPolicy
         mIconController.setIconVisibility(mSlotFirewall, mFirewallVisible);
 
         // network traffic
-        mShowNetworkTraffic = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+        mShowNetworkTraffic = Settings.System.getIntForUser(mContext.getContentResolver(),
             NETWORK_TRAFFIC_LOCATION, 0, UserHandle.USER_CURRENT) == 1;
         updateNetworkTraffic();
 
