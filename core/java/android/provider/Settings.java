@@ -5982,6 +5982,27 @@ public final class Settings {
         public static final String TORCH_POWER_BUTTON_GESTURE = "torch_power_button_gesture";
 
         /**
+         * Whether the phone vibrates on call connect
+         * @hide
+         */
+        @Readable
+        public static final String VIBRATE_ON_CONNECT = "vibrate_on_connect";
+
+         /**
+         * Whether the phone vibrates on call waiting
+         * @hide
+         */
+        @Readable
+        public static final String VIBRATE_ON_CALLWAITING = "vibrate_on_callwaiting";
+
+         /**
+         * Whether the phone vibrates on disconnect
+         * @hide
+         */
+        @Readable
+        public static final String VIBRATE_ON_DISCONNECT = "vibrate_on_disconnect";
+
+        /**
          * Whether to show power menu on LockScreen
          * @hide
          */
@@ -6287,6 +6308,9 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUS_BAR_CUSTOM_HEADER_IMAGE);
             PRIVATE_SETTINGS.add(STATUS_BAR_FILE_HEADER_IMAGE);
             PRIVATE_SETTINGS.add(STATUS_BAR_CUSTOM_HEADER_HEIGHT);
+            PRIVATE_SETTINGS.add(VIBRATE_ON_CONNECT);
+            PRIVATE_SETTINGS.add(VIBRATE_ON_CALLWAITING);
+            PRIVATE_SETTINGS.add(VIBRATE_ON_DISCONNECT);
         }
 
         /**
