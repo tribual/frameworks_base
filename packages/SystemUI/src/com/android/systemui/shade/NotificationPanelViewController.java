@@ -4717,7 +4717,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
             if (STATUS_BAR_QUICK_QS_PULLDOWN.equals(key)) {
                 mOneFingerQuickSettingsIntercept = TunerService.parseInteger(newValue, 1);
             } else if (ISLAND_NOTIFICATION.equals(key)) {
-                mUseIslandNotification = TunerService.parseIntegerSwitch(newValue, true);
+                mUseIslandNotification = TunerService.parseIntegerSwitch(newValue, false);
                 mNotifIsland.setIslandEnabled(mUseIslandNotification);
             }
         }
