@@ -161,7 +161,12 @@ public class QuickStatusBarHeader extends FrameLayout
 
         mHeaderQsPanel.setLayoutParams(qqsLP);
 
-        mQsHeaderLayout.setVisibility(mHeaderImageEnabled ? View.VISIBLE : View.GONE);
+        Configuration config = mContext.getResources().getConfiguration();
+        if (config.orientation != Configuration.ORIENTATION_LANDSCAPE) {
+            mQsHeaderLayout.setVisibility(mHeaderImageEnabled ? View.VISIBLE : View.GONE);
+        } else {
+            mQsHeaderLayout.setVisibility(View.GONE);
+        }
     }
 
     public void setExpanded(boolean expanded, QuickQSPanelController quickQSPanelController) {
