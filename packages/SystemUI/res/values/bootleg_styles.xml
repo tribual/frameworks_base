@@ -15,4 +15,10 @@
   <style name="ExTunerSettings" parent="@android:style/Theme.DeviceDefault.Settings">
     <item name="preferenceTheme">@style/TunerPreferenceTheme</item>
   </style>
+
+    <style name="Theme.SystemUI.QuickSettings" parent="@*android:style/Theme.DeviceDefault.SystemUI">
+        <item name="onShadeActiveLabel">?android:attr/textColorPrimary</item>
+        <item name="onShadeActiveLabelVariant">?android:attr/textColorSecondary</item>
+    </style>
+
 </resources>

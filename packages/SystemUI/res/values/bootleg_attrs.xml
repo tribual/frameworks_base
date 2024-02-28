@@ -5,4 +5,8 @@
 -->
 <resources>
 
+    <!-- color attribute tokens for QS -->
+    <attr name="onShadeActiveLabel" format="reference|color" />
+    <attr name="onShadeActiveLabelVariant" format="reference|color" />
+
 </resources>
